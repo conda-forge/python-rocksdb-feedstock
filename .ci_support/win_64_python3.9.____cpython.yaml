@@ -15,7 +15,7 @@ pin_run_as_build:
 python:
 - 3.9.* *_cpython
 rocksdb:
-- '6.10'
+- '7.9'
 target_platform:
 - win-64
 zlib:
