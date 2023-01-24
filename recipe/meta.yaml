@@ -21,7 +21,7 @@ requirements:
   host:
     - python
     - setuptools >=25
-    - rocksdb <=6.29.5
+    - rocksdb <7
     - bzip2
     - cython >=0.20
     - zlib
@@ -33,7 +33,7 @@ requirements:
 
 test:
   imports:
-    - rocksdb <=6.29.5
+    - rocksdb
 
 about:
   home: https://github.com/twmht/python-rocksdb
