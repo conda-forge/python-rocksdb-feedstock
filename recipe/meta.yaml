@@ -33,7 +33,7 @@ requirements:
 
 test:
   imports:
-    - rocksdb <7
+    - rocksdb <=6.29.5
 
 about:
   home: https://github.com/twmht/python-rocksdb
