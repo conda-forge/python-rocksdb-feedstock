@@ -1,8 +1,8 @@
 diff --git a/setup.py b/setup.py
-index 6b4dfc4..147ab5f 100644
+index 6b4dfc4..85ce665 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -8,7 +8,6 @@ extra_compile_args = [
+@@ -8,8 +8,6 @@ extra_compile_args = [
      '-std=c++11',
      '-O3',
      '-Wall',
@@ -10,3 +10,4 @@ index 6b4dfc4..147ab5f 100644
 -    '-Wconversion',
      '-fno-strict-aliasing',
      '-fno-rtti',
+ ]
