@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index 6b4dfc4..8e8f85b 100644
+index 6b4dfc4..fd8aea8 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -8,8 +8,6 @@ extra_compile_args = [
@@ -16,7 +16,7 @@ index 6b4dfc4..8e8f85b 100644
          extra_compile_args=extra_compile_args,
          language='c++',
 -        libraries=['rocksdb', 'snappy', 'bz2', 'z', 'lz4'],
-+        libraries=['rocksdb', 'snappy', 'bzip2', 'z', 'lz4'],
++        libraries=['rocksdb', 'snappy', 'bzip2', 'z', 'liblz4'],
      )],
      extras_require={
          "doc": ['sphinx_rtd_theme', 'sphinx'],
