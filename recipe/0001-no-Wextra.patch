@@ -7,6 +7,6 @@ index 6b4dfc4..147ab5f 100644
      '-O3',
      '-Wall',
 -    '-Wextra',
-     '-Wconversion',
+-    '-Wconversion',
      '-fno-strict-aliasing',
      '-fno-rtti',
