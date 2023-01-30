@@ -28,6 +28,7 @@ requirements:
     - cython >=0.20
     - zlib
     - pip
+    - lz4-c
 
   run:
     - python
