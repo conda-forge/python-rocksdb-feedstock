@@ -29,6 +29,7 @@ requirements:
     - zlib
     - pip
     - lz4-c
+    - zstd
 
   run:
     - python
