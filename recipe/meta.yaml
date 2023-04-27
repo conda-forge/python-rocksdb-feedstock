@@ -22,7 +22,7 @@ requirements:
   host:
     - python
     - setuptools >=25
-    - rocksdb=6
+    - rocksdb =6
     - bzip2
     - cython >=0.20
     - zlib
