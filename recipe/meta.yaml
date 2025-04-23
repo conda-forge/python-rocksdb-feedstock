@@ -11,7 +11,9 @@ source:
 
 build:
   number: 12
-  skip: True  # [win]
+  skip: true  # [win]
+  # python-rocksdb is not compatible with cython>=, while cython<3 doesn't have builds with python 3.13
+  skip: true  # [>=py313]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -25,7 +27,7 @@ requirements:
     - setuptools >=25
     - rocksdb 6
     - bzip2
-    - cython >=0.20
+    - cython >=0.20,<3
     - zlib
     - pip
 
