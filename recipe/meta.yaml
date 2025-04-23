@@ -25,7 +25,7 @@ requirements:
     - setuptools >=25
     - rocksdb 6
     - bzip2
-    - cython >=0.20,<3
+    - cython >=0.20
     - zlib
     - pip
 
