@@ -13,7 +13,7 @@ build:
   number: 12
   skip: true  # [win]
   # python-rocksdb is not compatible with cython>=, while cython<3 doesn't have builds with python 3.13
-  skip: true  # [>=py313]
+  skip: true  # [py>=313]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
