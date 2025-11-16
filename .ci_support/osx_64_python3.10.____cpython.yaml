@@ -29,13 +29,11 @@ pin_run_as_build:
 python:
 - 3.10.* *_cpython
 rocksdb:
-- '10.5'
+- '10.6'
 target_platform:
 - osx-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - channel_sources
 zlib:
 - '1'
