@@ -10,7 +10,7 @@ source:
   sha256: aa692fbd06d8ed4ad641feee2970062fe01120e87b645a29403c71c628639e4f
 
 build:
-  number: 17
+  number: 18
   skip: true  # [win]
   # python-rocksdb is not compatible with cython>=3, while cython<3 doesn't have builds with python 3.13
   skip: true  # [py>=313]
