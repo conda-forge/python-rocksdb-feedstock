@@ -11,10 +11,13 @@ source:
   # Remove when packaging a maintained source release with Cython 3 support.
   patches:
     - patches/0001-support-cython-3.patch
+    # The 0.7.0 sdist hard-codes GCC/Clang flags and the Unix bzip2 library
+    # name. Remove when packaging a maintained release with native MSVC support.
+    # https://github.com/twmht/python-rocksdb/issues/66
+    - patches/0002-support-msvc.patch
 
 build:
-  number: 21
-  skip: true  # [win]
+  number: 22
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -31,6 +34,8 @@ requirements:
     - rocksdb 6
     - bzip2
     - cython >=3
+    - lz4-c
+    - snappy
     - zlib
     - pip
 
