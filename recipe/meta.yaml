@@ -8,12 +8,13 @@ package:
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: aa692fbd06d8ed4ad641feee2970062fe01120e87b645a29403c71c628639e4f
+  # Remove when packaging a maintained source release with Cython 3 support.
+  patches:
+    - patches/0001-support-cython-3.patch
 
 build:
-  number: 20
+  number: 21
   skip: true  # [win]
-  # python-rocksdb is not compatible with cython>=3, while cython<3 doesn't have builds with python 3.13
-  skip: true  # [py>=313]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -25,9 +26,11 @@ requirements:
   host:
     - python
     - setuptools >=25
+    # Remove the direct pin when packaging a source compatible with the current
+    # global RocksDB pin; the released bindings still target the RocksDB 6 API.
     - rocksdb 6
     - bzip2
-    - cython >=0.20,<3
+    - cython >=3
     - zlib
     - pip
 
@@ -38,6 +41,8 @@ requirements:
 test:
   imports:
     - rocksdb
+  commands:
+    - python -c "import tempfile; import rocksdb; db = rocksdb.DB(tempfile.mkdtemp(), rocksdb.Options(create_if_missing=True)); db.put(b'key', b'value'); assert db.get(b'key') == b'value'"
 
 about:
   home: https://github.com/twmht/python-rocksdb
