@@ -37,6 +37,7 @@ requirements:
     - lz4-c
     - snappy
     - zlib
+    - zstd
     - pip
 
   run:
