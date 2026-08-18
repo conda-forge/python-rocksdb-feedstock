@@ -1,0 +1,57 @@
+From: conda-forge <conda-forge@users.noreply.github.com>
+Subject: [PATCH] Support building with MSVC
+
+The released setup.py passes GCC/Clang flags to every compiler and links the
+Unix bzip2 library name. Select equivalent MSVC flags and the Windows import
+libraries needed by the static RocksDB library when building on Windows.
+
+diff --git a/setup.py b/setup.py
+index 630cae9..1068df0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -7,12 +7,24 @@
+-extra_compile_args = [
+-    '-std=c++11',
+-    '-O3',
+-    '-Wall',
+-    '-Wextra',
+-    '-Wconversion',
+-    '-fno-strict-aliasing',
+-    '-fno-rtti',
+-]
+-
+-if platform.system() == 'Darwin':
+-    extra_compile_args += ['-mmacosx-version-min=10.7', '-stdlib=libc++']
++if platform.system() == 'Windows':
++    extra_compile_args = [
++        '/std:c++14',
++        '/O2',
++        '/W3',
++        '/EHsc',
++    ]
++    libraries = [
++        'rocksdb', 'snappy', 'bzip2', 'z', 'lz4', 'zstd',
++        'Rpcrt4', 'Shlwapi',
++    ]
++else:
++    extra_compile_args = [
++        '-std=c++11',
++        '-O3',
++        '-Wall',
++        '-Wextra',
++        '-Wconversion',
++        '-fno-strict-aliasing',
++        '-fno-rtti',
++    ]
++    libraries = ['rocksdb', 'snappy', 'bz2', 'z', 'lz4']
++    if platform.system() == 'Darwin':
++        extra_compile_args += ['-mmacosx-version-min=10.7', '-stdlib=libc++']
+@@ -37,7 +49,7 @@ setup(
+         include_dirs=['rocksdb'],
+         extra_compile_args=extra_compile_args,
+         language='c++',
+-        libraries=['rocksdb', 'snappy', 'bz2', 'z', 'lz4'],
++        libraries=libraries,
+     )],
+     extras_require={
+         "doc": ['sphinx_rtd_theme', 'sphinx'],
