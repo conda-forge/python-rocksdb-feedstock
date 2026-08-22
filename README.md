@@ -9,7 +9,9 @@ Package license: BSD-3-Clause
 
 Summary: Python bindings for RocksDB
 
-Documentation: https://python-rocksdb.readthedocs.io
+Development: https://github.com/twmht/python-rocksdb
+
+Documentation: https://python-rocksdb.readthedocs.io/
 
 Current build status
 ====================
