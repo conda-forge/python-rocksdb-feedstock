@@ -1,0 +1,79 @@
+schema_version: 1
+
+context:
+  name: python-rocksdb
+  version: "0.7.0"
+
+package:
+  name: ${{ name | lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: aa692fbd06d8ed4ad641feee2970062fe01120e87b645a29403c71c628639e4f
+  # Remove when packaging a maintained source release with Cython 3 support.
+  patches:
+    - patches/0001-support-cython-3.patch
+    # The 0.7.0 sdist hard-codes GCC/Clang flags and the Unix bzip2 library
+    # name. Remove when packaging a maintained release with native MSVC support.
+    # https://github.com/twmht/python-rocksdb/issues/66
+    - patches/0002-support-msvc.patch
+
+build:
+  number: 23
+  script: python -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - cython >=3
+        - pip
+        - python
+        - setuptools >=25
+  host:
+    - python
+    - setuptools >=25
+    # Remove the direct pin when packaging a source compatible with the current
+    # global RocksDB pin; the released bindings still target the RocksDB 6 API.
+    - rocksdb 6.*
+    - bzip2
+    - cython >=3
+    - lz4-c
+    - snappy
+    - zlib
+    - zstd
+    - pip
+  run:
+    - python
+    - setuptools >=25
+
+tests:
+  - python:
+      imports:
+        - rocksdb
+  - script:
+      - python -c "import tempfile; import rocksdb; db = rocksdb.DB(tempfile.mkdtemp(), rocksdb.Options(create_if_missing=True)); db.put(b'key', b'value'); assert db.get(b'key') == b'value'"
+      - pip check
+    requirements:
+      run:
+        - pip
+        - python
+
+about:
+  homepage: https://github.com/twmht/python-rocksdb
+  repository: https://github.com/twmht/python-rocksdb
+  documentation: https://python-rocksdb.readthedocs.io
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: Python bindings for RocksDB
+
+extra:
+  feedstock-name: python-rocksdb
+  recipe-maintainers:
+    - jeongseok-meta
+    - maxibor
