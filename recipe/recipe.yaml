@@ -40,7 +40,7 @@ requirements:
     - setuptools >=25
     # Remove the direct pin when packaging a source compatible with the current
     # global RocksDB pin; the released bindings still target the RocksDB 6 API.
-    - rocksdb 6
+    - rocksdb 6.*
     - bzip2
     - cython >=3
     - lz4-c
