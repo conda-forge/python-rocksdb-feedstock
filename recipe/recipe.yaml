@@ -20,7 +20,7 @@ source:
     - patches/0002-support-msvc.patch
 
 build:
-  number: 23
+  number: 24
   script: python -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
